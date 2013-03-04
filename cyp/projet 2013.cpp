@@ -16,19 +16,35 @@ void getLineInFile (const char *filename)
 	fp = fopen (filename, "r"); // open the file
 	if (fp == NULL)
 		throw (" ERROR ");
-	else 
-	{
+	else 	
 		while ((read = getline(&line, &len, fp)) != -1) 
 		{
 		cout << "Line : " << line;
 		}
 	if (line) delete(line);
 	fclose(fp);
-	}
 }
 
-int main()
+void visit(words tIndex)
 {
-	getLineInFile("texte.txt");
+	FILE *f = fopen("resultat.txt", "wb");  
 
+	while (tIndex!=NULL)
+	{
+		string res = mot + ": ";
+		string line = "";
+		while(tIndex.line!=NULL)
+		{
+			line += (string)endroit;
+			if(tIndex.line->line!=NULL)
+			{
+				line += ",";
+			}
+			tIndex.line = tIndex.line->lien;
+		}
+	res += line;
+	fwrite(res, sizeof(res), 1, f);  
+	tIndex = tIndex->lien;
+	}
+    fclose(f);  
 }
